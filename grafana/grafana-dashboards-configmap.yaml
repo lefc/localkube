@@ -1,0 +1,6 @@
+# dashboards injection
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: grafana-dashboards
+  namespace: grafana
