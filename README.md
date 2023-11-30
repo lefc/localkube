@@ -95,7 +95,7 @@ The current recommended resource configuration is as follows:
 - Swap: 2GB
 - Virtual Disk size: 20GB
 
-## Understanding the `metrokube` cluster
+## Understanding the `localkube` cluster
 Please refer to the ["What's Inside" section](#whats-inside).
 
 - You can create, modify, or delete any kind of resources using `kubectl`, `kubens`, or `k9s` directly from your CLI after installation.
