@@ -7,6 +7,7 @@ To learn more, we recommend reading [this document](README.md).
 ## History
 
 - [Unreleased](#unreleased)
+- [v2.0.2](#v202)
 - [v2.0.1](#v201)
 - [v2.0.0](#v200)
 - [v1.0.0](#v100)
@@ -20,11 +21,15 @@ To learn more, we recommend reading [this document](README.md).
 ### Other
 - Unbundling of required dependencies to aim for a more standalone install
 
+## v2.0.2
+
+### Fix
+- Fix cluster install bug from an wrongly expanded variable (continued)
+
 ## v2.0.1
 
 ### Fix
 - Fix cluster install bug from an wrongly expanded variable
-
 
 ## v2.0.0
 
