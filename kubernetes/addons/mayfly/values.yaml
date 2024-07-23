@@ -1,0 +1,14 @@
+# Default values for NCC/Mayfly
+# To be passed into the HELM install runtime
+# Define your specific deployment values here
+
+# Forget not to add your annotations in the format according to https://github.com/NCCloud/mayfly?tab=readme-ov-file#resouce-expiration
+
+# Replication values
+replicaCount: 1
+
+# ENV variables for resource monitoring
+# See Github issue - https://github.com/NCCloud/mayfly/issues/16#issuecomment-1574744050
+env:
+- name: RESOURCES
+  value: v1;Pod,apps/v1;Deployment,v1;Secret

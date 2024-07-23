@@ -13,6 +13,8 @@ spec:
       name: grafana
       labels:
         app: grafana
+      annotations:
+        mayfly.cloud.namecheap.com/expire: 300s #https://github.com/NCCloud/mayfly?tab=readme-ov-file#resouce-expiration
     spec:
       containers:
       - name: grafana
