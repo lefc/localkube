@@ -17,7 +17,7 @@ To learn more, we recommend reading [this document](README.md).
 - Path-aware definitions evaluations
 
 ### Other
--
+- Unbundling of required dependencies to aim for a more standalone install
 
 ## v2.0.0
 
@@ -37,4 +37,4 @@ To learn more, we recommend reading [this document](README.md).
 ## v1.0.0
 
 ### New
-- Initial implementation of `metrokube` with `minikube` via `podman` on `containerd` Stack, to provision a sandboxed kubernetes cluster.
+- Initial implementation of `localkube` with `minikube` via `podman` on `containerd` Stack, to provision a sandboxed kubernetes cluster.
