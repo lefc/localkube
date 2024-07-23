@@ -97,7 +97,7 @@ function cluster_deploy_checklist() {
     # -----------------------------------
 
     # set core working path
-    K8S_ADDONS="$DIR_K8S/core"
+    K8S_ADDONS="$DIR_K8S/addons"
 
     # -----------------------------------
     # DEPLOY HELM APPLICATIONS
@@ -110,13 +110,9 @@ function cluster_deploy_checklist() {
 
     ## DEPLOY STRIMZI OPERATOR - HELM
     ## COMMENT OUT THIS SECTION IF YOU ARE USING THE YAML DEPLOY VARIANT VIA K8S!!!
-    printf "\n=> Deploying 'Strimzi' ....\n\n"
-    helm upgrade --install --atomic --cleanup-on-fail strimzi-cluster-operator --namespace kafka --values $K8S_ADDONS/strimzi/helm/values.yaml oci://quay.io/strimzi-helm/strimzi-kafka-operator
-    printf "\n\n"
-
-    # DEPLOY KAFKA (nodepool mode, see Strimzi docs)
-    printf "\n=> Deploying 'Kafka' ....\n\n"
-    kubectl apply --namespace kafka -f $K8S_ADDONS/addons/kafka-strimzi/helm/ && sleep 10
+    # printf "\n=> Deploying 'Strimzi' ....\n\n"
+    # helm upgrade --install --atomic --cleanup-on-fail strimzi-cluster-operator --namespace kafka --values $K8S_ADDONS/strimzi/helm/values.yaml oci://quay.io/strimzi-helm/strimzi-kafka-operator
+    # printf "\n\n"
 
     # -----------------------------------
     # DEPLOY NATIVE YAML 
@@ -124,10 +120,14 @@ function cluster_deploy_checklist() {
 
     # DEPLOY STRIMZI OPERATOR - YAML
     ## TO SUPPORT YAML MODE - UNCOMMENT THE FOLLOWING SECTION, AND COMMENT OUT THE APROPRIATE LINE IN THE HELM INSTALL
-    # printf "\n=> Deploying 'strimzi' ....\n\n"
-    # kubectl apply --namespace kafka -f $K8S_ADDONS/strimzi/yaml/ && sleep 30
+    printf "\n=> Deploying 'strimzi' ....\n\n"
+    kubectl apply --namespace kafka -f $K8S_ADDONS/strimzi/yaml/ && sleep 30
+
+    # DEPLOY KAFKA (nodepool mode, see Strimzi docs)
+    # printf "\n=> Deploying 'Kafka' ....\n\n"
+    # kubectl apply --namespace kafka -f $K8S_ADDONS/kafka-strimzi/helm/ && sleep 10
 
     # DEPLOY KAFKA (ephemeral mode, see Strimzi docs)
-    # printf "\n=> Deploying 'Kafka' ....\n\n"
-    # kubectl apply --namespace kafka -f $K8S_ADDONS/kafka-strimzi/yaml/ && sleep 10
+    printf "\n=> Deploying 'Kafka' ....\n\n"
+    kubectl apply --namespace kafka -f $K8S_ADDONS/kafka-strimzi/yaml/ && sleep 10
 }
