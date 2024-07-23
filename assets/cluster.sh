@@ -84,11 +84,11 @@ function cluster_deploy_checklist() {
 
     # deploy prometheus
     printf "\n=> Deploying 'prometheus' ....\n\n"
-    kubectl apply --namespace prometheus -f $DIR_K8S/prometheus/ && sleep 40
+    kubectl apply --namespace prometheus -f $K8S_CORE/prometheus/ && sleep 40
 
     # deploy Grafana
     printf "\n=> Deploying 'Grafana' ....\n\n"
-    kubectl apply  --namespace grafana -f $DIR_K8S/grafana/ && sleep 10
+    kubectl apply  --namespace grafana -f $K8S_CORE/grafana/ && sleep 10
 
     # -----------------------------------
     # -----------------------------------
@@ -105,18 +105,18 @@ function cluster_deploy_checklist() {
 
     ## DEPLOY MAYFLY OPERATOR
     printf "\n=> Deploying 'Mayfly' ....\n\n"
-    helm upgrade --install --atomic --cleanup-on-fail mayfly nccloud/mayfly --namespace mayfly --values $DIR_K8S/addons/mayfly/values.yaml
+    helm upgrade --install --atomic --cleanup-on-fail mayfly nccloud/mayfly --namespace mayfly --values $K8S_ADDONS/mayfly/values.yaml
     printf "\n\n"
 
     ## DEPLOY STRIMZI OPERATOR - HELM
     ## COMMENT OUT THIS SECTION IF YOU ARE USING THE YAML DEPLOY VARIANT VIA K8S!!!
     printf "\n=> Deploying 'Strimzi' ....\n\n"
-    helm upgrade --install --atomic --cleanup-on-fail strimzi-cluster-operator --namespace kafka --values $DIR_K8S/addons/strimzi/helm/values.yaml oci://quay.io/strimzi-helm/strimzi-kafka-operator
+    helm upgrade --install --atomic --cleanup-on-fail strimzi-cluster-operator --namespace kafka --values $K8S_ADDONS/strimzi/helm/values.yaml oci://quay.io/strimzi-helm/strimzi-kafka-operator
     printf "\n\n"
 
     # DEPLOY KAFKA (nodepool mode, see Strimzi docs)
     printf "\n=> Deploying 'Kafka' ....\n\n"
-    kubectl apply --namespace kafka -f $DIR_K8S/addons/kafka-strimzi/helm/ && sleep 10
+    kubectl apply --namespace kafka -f $K8S_ADDONS/addons/kafka-strimzi/helm/ && sleep 10
 
     # -----------------------------------
     # DEPLOY NATIVE YAML 
@@ -125,9 +125,9 @@ function cluster_deploy_checklist() {
     # DEPLOY STRIMZI OPERATOR - YAML
     ## TO SUPPORT YAML MODE - UNCOMMENT THE FOLLOWING SECTION, AND COMMENT OUT THE APROPRIATE LINE IN THE HELM INSTALL
     # printf "\n=> Deploying 'strimzi' ....\n\n"
-    # kubectl apply --namespace kafka -f $DIR_K8S/strimzi/yaml/ && sleep 30
+    # kubectl apply --namespace kafka -f $K8S_ADDONS/strimzi/yaml/ && sleep 30
 
     # DEPLOY KAFKA (ephemeral mode, see Strimzi docs)
     # printf "\n=> Deploying 'Kafka' ....\n\n"
-    # kubectl apply --namespace kafka -f $DIR_K8S/kafka-strimzi/yaml/ && sleep 10
+    # kubectl apply --namespace kafka -f $K8S_ADDONS/kafka-strimzi/yaml/ && sleep 10
 }
