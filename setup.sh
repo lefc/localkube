@@ -2,7 +2,7 @@
 
 # DANGER ZONE - ONLY CHANGE WHEN CREATING A NEW VERSION!
 # set current published version
-LOCALKUBE_VERSION=2.0.0
+LOCALKUBE_VERSION=2.0.1
 
 # set target K8s version to deploy
 K8S_VERSION=1.27.11
